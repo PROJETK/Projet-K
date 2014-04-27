@@ -38,7 +38,7 @@ class Pretmodel extends CI_Model
 	/**
 	 *	retourne les objets qu'un user a emprunter
 	 */
-	public function getObjectUser($user2) 
+	public function getObjectEmprunter($user2) 
 	{
 		return $this->db->select('*');
 				->from($this->_table);
