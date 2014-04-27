@@ -18,25 +18,46 @@ class Objectmodel extends CI_Model
 	/**
 	 *	retourne les objets d'un propriétaire
 	 */
-	public function getUserObject($proprio) // WTF? pourquoi il a mis varchar comme propriétaire???? bref osef
+	public function getUserObject($user) // WTF? pourquoi il a mis varchar comme propriétaire???? bref osef
 	{
 		return $this->db->select('Code,Titre')
 				->from($this->_table)
-				->where('Proprietaire', $proprio)
+				->where('Proprietaire', "$user")
 				->get()
 				->result();
 	}
 
 	/**
-	 *	retourne les objets dont le titre ressemble (fonction de recherche)
+	 *	retourne l'objet dont l valeur du code est $number
 	 */
-	public function getAllObject($title) // WTF? pourquoi il a mis varchar comme propriétaire???? bref osef
+	public function getObjectByNumber($code)
 	{
-		return $this->db->select('Code,Titre')
+		return $this->db->select('*')
 				->from($this->_table)
-				->like('Titre', $title)
+				->where('Code', (int)$code)
 				->get()
 				->result();
+	}
+	/**
+	 *	insert l'objet d'un proprio
+	 */
+	public function addUserObject($user,$titre)
+	{
+		$data = array(
+			'Titre'			=> "$titre",
+			'Proprietaire'	=> "$user"
+		);
+		$this->db->insert($this->_table, $data);
+	}
+
+	/**
+	 *	modifie le titre d'un objet dont le code est $code
+	 */
+	public function updateObject($code, $titre)
+	{
+		$tab = array('Titre' => "$titre" );
+		$this->db->where('Code', $code);
+		$this->db->update($this->_table, $tab);
 	}
 
 }
