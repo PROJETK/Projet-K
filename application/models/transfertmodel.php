@@ -31,6 +31,7 @@ class Pretmodel extends CI_Model
 		return $this->db->select('*');
 				->from($this->_table);
 				->where('user1', "$user")
+				->join('objet', "objet.code = $this->_table.objet");
 				->get()
 				->result();
 	}
@@ -43,6 +44,7 @@ class Pretmodel extends CI_Model
 		return $this->db->select('*');
 				->from($this->_table);
 				->where('user2', "$user2")
+				->join('objet', "objet.code = $this->_table.objet");
 				->get()
 				->result();
 	}
