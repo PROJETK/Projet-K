@@ -49,6 +49,22 @@ class Home extends CI_Controller {
 
 		$this->load->view('home', $data);
 	}
+
+    public function preter()
+    {
+        $this->load->model("transfertmodel", "transfert");
+
+        $objetId = $this->input->post("objet_id");
+        $userNameCible = $this->input->post("user_cible_username");
+
+        if ($objetId && $userNameCible) {
+             $this->transfert->addEmprunt($this->user->getUserName(), $userNameCible, $objetId);
+        }
+
+        // Une fois le traitement effectué, on retourne sur la page d'accueil
+        redirect(base_url());
+
+    }
 }
 
 /* End of file home.php */

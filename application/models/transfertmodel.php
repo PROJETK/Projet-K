@@ -28,10 +28,10 @@ class Pretmodel extends CI_Model
 	 */
 	public function getObjectUser($user) 
 	{
-		return $this->db->select('*');
-				->from($this->_table);
+		return $this->db->select('*')
+				->from($this->_table)
 				->where('user1', "$user")
-				->join('objet', "objet.code = $this->_table.objet");
+				->join('objet', "objet.code = $this->_table.objet")
 				->get()
 				->result();
 	}
@@ -41,10 +41,10 @@ class Pretmodel extends CI_Model
 	 */
 	public function getObjectEmprunter($user2) 
 	{
-		return $this->db->select('*');
-				->from($this->_table);
+		return $this->db->select('*')
+				->from($this->_table)
 				->where('user2', "$user2")
-				->join('objet', "objet.code = $this->_table.objet");
+				->join('objet', "objet.code = $this->_table.objet")
 				->get()
 				->result();
 	}
