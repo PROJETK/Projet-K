@@ -47,23 +47,31 @@ class Home extends CI_Controller {
 		$data["user"] = $this->user;
 		$data["objects"] = $this->objects->getUserObject($this->user->getUserName());
 
+		$this->load->view('header');
 		$this->load->view('home', $data);
+		$this->load->view('footer');
 	}
 
     public function preter()
     {
-        $this->load->model("transfertmodel", "transfert");
-
-        $objetId = $this->input->post("objet_id");
-        $userNameCible = $this->input->post("user_cible_username");
-
-        if ($objetId && $userNameCible) {
-             $this->transfert->addEmprunt($this->user->getUserName(), $userNameCible, $objetId);
-        }
-
-        // Une fois le traitement effectué, on retourne sur la page d'accueil
-        redirect(base_url());
-
+        $this->load->view('header');
+        $this->load->view('addObject', $data);
+        $this->load->view('footer');
+    }
+    
+    public function doPreter()
+    {
+	    $this->load->model("transfertmodel", "transfert");
+	    
+	    $objetId = $this->input->post("objet_id");
+	    $userNameCible = $this->input->post("user_cible_username");
+	    
+	    if ($objetId && $userNameCible) {
+	    	 $this->transfert->addEmprunt($this->user->getUserName(), $userNameCible, $objetId);
+	    }
+	    
+	    // Une fois le traitement effectué, on retourne sur la page d'accueil
+	    redirect(base_url());
     }
 }
 
