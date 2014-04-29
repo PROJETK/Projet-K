@@ -30,3 +30,5 @@ application/config/database.php
 application/config/database.php
 
 application/config/config.php
+
+application/views/home.php
