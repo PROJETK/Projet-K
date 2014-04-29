@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Accueil</title>
-
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url("application/assets/css/semantic.min.css") ?>" />
-	<script src="<?php echo base_url("application/assets/css/semantic.min.js") ?>" >
+	<script src="<?php echo base_url("application/assets/js/semantic.min.js") ?>" >
 	</script>
+	
 </head>
 <body>
 

@@ -49,13 +49,33 @@ class Home extends CI_Controller {
 		$this->load->view('home', $this->data);
 		$this->load->view('footer');
 	}
+	
+	public function creerObjet()
+	{
+		$this->load->view('header');
+		$this->load->view('AddObject');
+		$this->load->view('footer');
+	}
+	
+	public function doCreerObjet()
+	{
+		$objet = $this->input->post("objectName");
+		
+		if ($objet) {
+			$this->objects->addUserObject($this->user->getUserName(),$objet);
+		}
+		
+		// Une fois le traitement effectué, on retourne sur la page d'accueil
+		redirect(base_url());
+	}
 
     public function preter($idObject)
     {
 	    $this->data["object"] = $this->objects->getObjectByNumber($idObject);
+	    $this->data["idObject"] = $idObject;
 	    
         $this->load->view('header');
-        $this->load->view('AddObject', $this->data);
+        $this->load->view('LendObject', $this->data);
         $this->load->view('footer');
     }
     
