@@ -2,6 +2,21 @@
 
 class Home extends CI_Controller {
 
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -  
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in 
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 */
 
 	public $user;
 	public $data;
@@ -12,6 +27,7 @@ class Home extends CI_Controller {
 		// Your own constructor code
 
 		$this->load->library("User");
+		$this->load->model("objectmodel", "objects");
 
 		// Chargement d'un utilisateur fake...
 		$this->user = new User();
@@ -26,21 +42,20 @@ class Home extends CI_Controller {
 	public function index()
 	{
 
-		$this->load->model("objectmodel", "objects");
-
-
-		$data["user"] = $this->user;
-		$data["objects"] = $this->objects->getUserObject($this->user->getUserName());
+		$this->data["user"] = $this->user;
+		$this->data["objects"] = $this->objects->getUserObject($this->user->getUserName());
 
 		$this->load->view('header');
-		$this->load->view('home', $data);
+		$this->load->view('home', $this->data);
 		$this->load->view('footer');
 	}
 
-    public function preter()
+    public function preter($idObject)
     {
+	    $this->data["object"] = $this->objects->getObjectByNumber($idObject);
+	    
         $this->load->view('header');
-        $this->load->view('addObject', $data);
+        $this->load->view('AddObject', $this->data);
         $this->load->view('footer');
     }
     
@@ -57,26 +72,6 @@ class Home extends CI_Controller {
 	    
 	    // Une fois le traitement effectué, on retourne sur la page d'accueil
 	    redirect(base_url());
-    }
-
-
-    public function ajouterObjet()
-    {
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'nom de l\'objet', 'required|max_lenght[100]'); // 100? 50 ?
-		$this->form_validation->set_rules('user', 'utilisateur', 'required|max_lenght[50]');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->form_validation->set_error_delimiters('<div class="alert">', '</div>');
-			$this->load->view('adObject');
-		}else{
-			$user = $this->input->post('user', true);
-			$name = $this->input->post('name',true);
-			$this->load->model('objectmodel');
-			$this->objectmodel->addUserObject($user,$name);
-			$this->load->view('successAddObject');
-		}
     }
 }
 

@@ -21,7 +21,7 @@
                         <td><?php echo $object->Code ?></td>
                         <td><?php echo $object->Titre ?></td>
                         <td>
-                            <a class="ui vertical animated button" href="<?php echo base_url('index.php/home/preter') ?>" style="width:110px;">
+                            <a class="ui vertical animated button" href="<?php echo base_url('index.php/home/preter/' . $object->Code) ?>" style="width:110px;">
                               <div class="hidden content">Partager</div>
                               <div class="visible content">
                                 <i class="gift icon"></i>
