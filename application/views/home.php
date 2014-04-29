@@ -71,6 +71,8 @@
 	<pre><?php echo print_r($user); ?></pre>
 	<h2>Objects</h2>
 	<pre><?php echo print_r($objects); ?></pre>
+	<a href="<?php echo base_url('home/ajouterObjet');?>"> cliquer ici pour ajouter un objet</a>
+	
 </div>
 
 </body>

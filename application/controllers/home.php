@@ -51,10 +51,6 @@ class Home extends CI_Controller {
 
     }
 
-    public function ajouterObjet()
-    {
-    	$this->load->view('addObject');
-    }
 
     public function ajouterObjet()
     {
