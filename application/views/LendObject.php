@@ -30,7 +30,7 @@
 		  <div class="ui error message">
 			<div class="header">Erreur : </div>
 		  </div>
-		  <input type="submit" class="ui blue submit button" value="Prêter l'objet" />
+		  <input type="submit" class="ui blue submit button <?php if ($object[0]->actif == 1): ?>disabled<?php endif ?>" value="Prêter l'objet" />
 		</div>
 	</form>
 </div>

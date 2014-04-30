@@ -73,6 +73,14 @@ class TransfertModel extends CI_Model
 		);
 		$this->db->insert($this->_table, $data);
 	}
+	
+	/**
+	 *	insert un transfert // par default statut = 1 (actif)
+	 */
+	public function endEmprunt($idObjet)
+	{
+		$this->db-->update($this->_table, array("actif", "0"), array("objet", $idObjet));
+	}
 
 	/**
 	 *	change le statut d'un transfert // par défault le desactive

@@ -10,7 +10,8 @@
             <table class="ui table segment">
                 <thead>
                 <tr><th>id</th>
-                    <th style="width:80%">Objet</th>
+                    <th style="width:70%">Objet</th>
+                    <th>Destinataire</th>
                     <th></th>
                 </tr></thead>
                 <tbody>
@@ -18,13 +19,14 @@
                     <tr>
                         <td><?php echo $object->Code ?></td>
                         <td><?php echo $object->Titre ?></td>
+                        <td><?php echo $object->user2 ?></td>
                         <td>
-                            <a class="ui vertical animated button" href="<?php echo base_url('index.php/home/preter/' . $object->Code) ?>" style="width:110px;">
-                              <div class="hidden content">Partager</div>
+                            <a class="ui vertical <?php if ($object->actif == 1): ?> blue <?php endif ?> animated button" href="<?php echo base_url('index.php/home/preter/' . $object->Code) ?>" style="width:110px;">
+                              <div class="hidden content"><?php if ($object->actif == 1): ?> Réclamer <?php else: ?> Partager <?php endif ?></div>
                               <div class="visible content">
                                 <i class="gift icon"></i>
                               </div>
-                              <?php if ($object->actif != null): ?>
+                              <?php if ($object->actif == 1): ?>
                                 <div class="ui right red corner label">
                                   <i class="heart icon"></i>
                                 </div>
@@ -38,7 +40,7 @@
                 <? endforeach ?>
                 </tbody>
                 <tfoot>
-                <tr><th colspan="3">
+                <tr><th colspan="4">
                         <a class="ui blue labeled icon button" href="<?php echo base_url('index.php/home/creerObjet/') ?>"><i class="add icon"></i> Ajouter un objet</a>
                     </th>
                 </tr></tfoot>

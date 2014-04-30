@@ -20,10 +20,12 @@ class Objectmodel extends CI_Model
 	 */
 	public function getUserObject($user) // WTF? pourquoi il a mis varchar comme propriétaire???? bref osef
 	{
-		return $this->db->select('Code,Titre,actif')
+		return $this->db->select('Code,Titre,actif,user2')
 				->from($this->_table)
 				->where('Proprietaire', "$user")
 				->join('transfert', "transfert.objet = $this->_table.Code", "left outer")
+				->or_where("actif", "1")
+				->or_where("actif", "NULL")
 				->get()
 				->result();
 	}
@@ -36,6 +38,7 @@ class Objectmodel extends CI_Model
 		return $this->db->select('*')
 				->from($this->_table)
 				->where('Code', (int)$code)
+				->join('transfert', "transfert.objet = $this->_table.Code", "left outer")
 				->get()
 				->result();
 	}
