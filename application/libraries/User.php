@@ -23,12 +23,22 @@ class User {
     {
         $CI =& get_instance();
         $password = $this->encrypt->encode($password, CREEPER);
+        $CI->load->model('usermodel');
+        if($CI->usermodel->userConnect($login,$password)){
+            $CI->session->set_userdata('logged', true);
+            return true;
+        }else{
+            $CI->session->set_userdata('logged', false);
+            return false;
+        }
     }
 
-    public function subscribe($login, $password)
+    public function subscribe($login, $password, $email)
     {
         $CI =& get_instance();
         $password = $this->encrypt->encode($password, CREEPER);
+        $CI->load->model('usermodel');
+        $CI->usermodel->userSubscribe($login,$password,$email);
     }
 
     /**
