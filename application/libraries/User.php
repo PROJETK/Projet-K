@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User {
 	
@@ -12,6 +12,24 @@ class User {
 	{
         //Constructeur...
 	}
+
+    public function isConnect()
+    {
+        $CI =& get_instance();
+        if($CI->session->userdata('logged')==true){return true;}else{return false;} // condition ternaire :)
+    }
+
+    public function connect($login, $password)
+    {
+        $CI =& get_instance();
+        $password = $this->encrypt->encode($password, CREEPER);
+    }
+
+    public function subscribe($login, $password)
+    {
+        $CI =& get_instance();
+        $password = $this->encrypt->encode($password, CREEPER);
+    }
 
     /**
      * @param mixed $email

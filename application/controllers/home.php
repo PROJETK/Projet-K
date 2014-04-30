@@ -43,11 +43,19 @@ class Home extends CI_Controller {
 	{
 
 		$this->data["user"] = $this->user;
-		$this->data["objects"] = $this->objects->getUserObject($this->user->getUserName());
+		if($this->user->isConnect()){
+			$this->data["objects"] = $this->objects->getUserObject($this->user->getUserName());
+			$this->load->view('header');
+			$this->load->view('home', $this->data);
+			$this->load->view('footer');
+		}else{
+			$this->load->view('header');
+			$this->load->view('connexion', $this->data);
+			$this->load->view('footer');
+		}
+		
 
-		$this->load->view('header');
-		$this->load->view('home', $this->data);
-		$this->load->view('footer');
+
 	}
 	
 	public function creerObjet()
