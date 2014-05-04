@@ -13,7 +13,11 @@ class Usermodel extends CI_Model
 				->where('login', $log)
 				->get()
 				->result();
+			
 			if(empty($trigger)){return false;}else{return true;} //condition ternaire super cool
+			// non, ceci n'est pas une condition ternaire.
+			// empty($trigger) ? return false : return true;
+			// ceci en est une.
 	}
 
 	public function userSubscribe($log,$pass,$email)
